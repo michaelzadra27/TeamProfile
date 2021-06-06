@@ -23,7 +23,7 @@ module.exports = team => {
         <div class="container">
             <div class="row">
                 <div class="main-section col-12 d-flex justify-content-center">
-                    ${createProfile(team)}
+                    ${createTeam(team)}
                 </div>
             </div>
         </div>
@@ -33,10 +33,10 @@ module.exports = team => {
 };
 
 // Create Team Profile
-const createProfile = team => {
+const createTeam = team => {
 
     // Create Manager Profile
-    const createManager = manager => {
+    const generateManager = manager => {
         return `
         <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -55,7 +55,7 @@ const createProfile = team => {
     };
 
     // Create Engineer Profile
-    const createEngineer = engineer => {
+    const generateEngineer = engineer => {
         return `
         <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -65,7 +65,8 @@ const createProfile = team => {
                 <div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID:${engineer.getId()} </li>
-                    <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                    <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}
+                    </a></li>
                     <li class="list-group-item">Office Number:${engineer.getGithub()}</li>
                   </ul>
                 </div>
@@ -74,7 +75,7 @@ const createProfile = team => {
     };
 
     // Create Intern Profile
-    const createIntern = intern => {
+    const generateIntern = intern => {
         return `
         <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -96,16 +97,16 @@ const createProfile = team => {
 
     html.push(team
         .filter(employee => employee.getRole() === 'Manager')
-        .map(manager => createManager(manager))
+        .map(manager => generateManager(manager))
     );
     html.push(team
         .filter(employee => employee.getRole() === 'Engineer')
-        .map(engineer => createEngineer(engineer))
+        .map(engineer => generateEngineer(engineer))
         .join("")
     );
     html.push(team
         .filter(employee => employee.getRole() === 'Intern')
-        .map(intern => createIntern(intern))
+        .map(intern => generateIntern(intern))
         .join("")
     );
 
