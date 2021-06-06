@@ -2,19 +2,15 @@ const Employee = require('./lib/employee')
 const Manager = require('./lib/manager')
 const Engineer = require('./lib/engineer')
 const Intern = require('./lib/intern')
-
-
-
-const render = require('./src/page-template.js');
+const render = require('./src/template.js');
 
 //grabbing inquirer to ask the questions
 const inquirer = require('inquirer');
 const fs = require('fs');
-const path = require('path');
 const jest = require('jest');
 
-const DIST_DIR = path.resolve(__dirname, 'dist')
-const outputPath = path.join(DIST_DIR, 'index.html');
+
+const outputPath = 'C:/Users/mzadra/Class/TeamProfile/Develop/dist/index.html'
 
 var memberObjects = []
 
@@ -88,7 +84,7 @@ function init() {
 
         default:
           newHTML();
-          console.log(memberObjects)
+          
       }
     });
   }
@@ -163,7 +159,7 @@ function init() {
       const intern = new Intern(data.internName, data.internID, data.internEmail, data.internSchool)
       memberObjects.push(intern);
       addMember();
-      console.log(memberObjects)
+      
     })
   }
 
@@ -178,10 +174,9 @@ function init() {
     function newHTML() {
 
       // Create dist directory for index.html if it doesnt exist
-      if (!fs.existsSync(DIST_DIR)) {
-          fs.mkdirSync(DIST_DIR)
-      }
-      console.log("Generating Team Profile.... ");
+      // if (!fs.existsSync(DIST_DIR)) {
+      //     fs.mkdirSync(DIST_DIR)
+      // }
       fs.writeFileSync(outputPath, render(memberObjects), "utf-8");
   }
 
