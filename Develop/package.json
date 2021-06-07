@@ -8,6 +8,7 @@
     "test": "test"
   },
   "dependencies": {
+    "inquirer": "^8.1.0",
     "jest": "^27.0.4",
     "path": "^0.12.7"
   },
